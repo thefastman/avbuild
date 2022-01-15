@@ -105,6 +105,7 @@ jobs:
       run: |
         wget https://sourceforge.net/projects/avbuild/files/dep/dep.7z/download -O dep.7z
         wget https://sourceforge.net/projects/avbuild/files/dep/dep_gpl.7z/download -O dep_gpl.7z
+        sed -i '/X264_API_IMPORTS/d' "ffmpeg-${FF_VERSION}/libavcodec/libx264.c" # we link against static libx264
     - name: Configure and Build
       shell: cmd
       run: |
@@ -165,6 +166,7 @@ jobs:
         ./tools/ci-before-build.sh
         wget https://sourceforge.net/projects/avbuild/files/dep/dep_gpl.7z/download -O dep_gpl.7z
         7z x -y dep_gpl.7z -otools
+        sed -i '/X264_API_IMPORTS/d' "ffmpeg-${FF_VERSION}/libavcodec/libx264.c" # we link against static libx264
     - name: Configure and Build
       shell: bash
       run: |
